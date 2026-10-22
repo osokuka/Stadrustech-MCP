@@ -1,9 +1,10 @@
 # Stadrustech-MCP
 
-Client package for **Scardus Tech** Hosted Client MCP — connect your AI agent to your organization’s ITSM portal (tickets, SLA services, draft projects, reports).
+Client package for **Scardus Tech** Hosted Client MCP — connect your AI agent to your organization’s ITSM portal (tickets, SLA services, draft projects, devices, reports).
 
 | | |
 |--|--|
+| **Portal** | `https://ticket.scardustech.com` (sign in as a **client** user) |
 | **MCP URL** | `https://ticket.scardustech.com/mcp` |
 | **Auth** | Portal API key `ck_live_…` (`X-API-Key` or `Authorization: Bearer`) |
 | **Not accepted** | Tenant keys `sk_live_…` |
@@ -12,16 +13,24 @@ This repo is what **clients download**. The MCP server is hosted by Scardus Tech
 
 ## What you get
 
-- **Cursor skill** `itsm-client-mcp-agent` — persists until required fields are gathered and helps pick the best SLA catalog services for your need
+- **Cursor skill** `itsm-client-mcp-agent` — gathers required fields, recommends the **best-fit path** (ticket vs project vs a few tickets), and picks SLA catalog services — **you always choose**
 - **MCP config snippets** for Cursor / Claude Desktop
 - **Tool reference** for agents (`docs/TOOLS.md`)
 
-## 1. Get a portal API key
+## 1. Where to get your API key (`ck_live_…`)
 
-1. Sign in to the **client portal** (your Scardus Tech organization).
-2. Open **API keys** and create a key with the permissions you need (tickets / projects / reports).
-3. Copy the secret once — it starts with `ck_live_`.
-4. Store it in your password manager; do **not** commit it to git.
+Keys are created **only in the client portal** by a **client admin** or **client observer** for your organization.
+
+1. Open the portal: **[https://ticket.scardustech.com](https://ticket.scardustech.com)**
+2. Sign in with your **organization (client) account** — not a Scardus staff login.
+3. In the left sidebar open **API Keys** (Management).
+4. Click **Create** / add a key, give it a name (e.g. `Cursor MCP`).
+5. **Copy the secret immediately** — it is shown **once**. It must start with `ck_live_`.
+6. Store it in a password manager. **Never** commit it to git or paste it into public chats.
+
+If you do not see **API Keys**, ask your organization’s **client admin** to create a key for you, or to grant you admin/observer access.
+
+Permissions on the key cover tickets, projects, devices (assets), and reports as enabled for your org. New keys typically include read/create for those areas; ask Scardus if a flag is missing.
 
 ## 2. Connect Cursor (remote MCP)
 
@@ -61,20 +70,25 @@ cp -R .cursor/skills/itsm-client-mcp-agent /path/to/your-project/.cursor/skills/
 
 Or into your user skills: `~/.cursor/skills/itsm-client-mcp-agent/`.
 
-## 4. Use it
+## 4. Use it — best-fit assistance
 
-Ask the agent things like:
+Describe what you need in plain language. The agent should:
 
-- “Open a ticket — Outlook won’t sync for 12 users.”
-- “Plan a draft project to migrate the file server.”
-- “Which SLA service fits VPN access for a new site?”
+1. Clarify the need briefly
+2. Propose an **optimized path** (and alternatives) — for example:
+   - Simple break/fix → **one ticket**
+   - Large / multi-step / multi-team work you called a “ticket” → suggest a **draft project** instead
+   - A “project” that is really 2–3 independent fixes → suggest **separate tickets** instead
+3. Recommend SLA **services** from your catalog
+4. **Wait for your choice**, then gather required fields and create via MCP
+
+You always decide. The agent recommends; it must not create tickets/projects until you confirm.
+
+Examples:
+
+- “Outlook won’t sync for 12 users.”
+- “We need to migrate the file server and retrain staff.” (likely a project)
 - “Register a new laptop for Jane — here’s the serial.”
-
-The skill will:
-
-1. Call `client_services_list` (tickets/projects) or `client_devices_template` (devices) and show what the system needs
-2. Gather missing fields until ready
-3. Confirm with you, then call the MCP create/submit tools
 
 ## Security
 
@@ -84,7 +98,7 @@ The skill will:
 
 ## Docs
 
-- [Agent skill](.cursor/skills/itsm-client-mcp-agent/SKILL.md)
+- [Agent skill](.cursor/skills/itsm-client-mcp-agent/SKILL.md) — includes ticket vs project optimization rules
 - [Field & selection reference](.cursor/skills/itsm-client-mcp-agent/reference.md)
 - [MCP tools](docs/TOOLS.md)
 - [Claude Desktop example](configs/claude_desktop_config.example.json)

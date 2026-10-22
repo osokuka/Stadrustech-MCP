@@ -7,9 +7,17 @@ Companion to `SKILL.md`. Read when gathering fields or ranking services.
 | Item | Rule |
 |------|------|
 | Key | `ck_live_…` only (`X-API-Key` or `Authorization: Bearer`) |
+| Where to get it | Portal **https://ticket.scardustech.com** → sign in as client → sidebar **API Keys** → create → copy once (client admin / observer) |
 | Rejected | `sk_live_…`, missing key, inactive/expired key |
 | Data scope | Always the key’s organization — no other org |
 | MCP URL | `https://ticket.scardustech.com/mcp` |
+
+## Ticket vs project (quick heuristics)
+
+- **One ticket:** single incident/request, one primary service, clear “done”.
+- **Suggest project instead of one ticket:** migration, multi-site, many stakeholders, phased delivery, or large estimate.
+- **Suggest 2–3 tickets instead of a project:** independent fixes that do not need a shared plan/estimate/submit workflow.
+- Always show **Recommended / Alternative / Which do you want?** — client chooses.
 
 ## Tool map
 
