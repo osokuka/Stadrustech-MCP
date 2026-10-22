@@ -154,9 +154,30 @@ Your locations: [from template.your_locations]
 Tools: `client_devices_template` → gather → `client_devices_create` → optional `client_devices_list`/`update`.  
 `client_locations_list` if you only need locations.
 
-### D — Status / reports
+### D — Network topology & org people (onboard / offboard)
 
-- List/get: `client_tickets_*`, `client_projects_*`, `client_devices_*` with filters the user cares about.
+**Org people are not portal users** — they use company assets/services but do not log into ITSM. Never invent portal accounts for them.
+
+**Always start with `client_topology_template`.** Hierarchy: site (location) → zone (subnet/VLAN) → devices + IT services (DNS/VPN/mail — **no secrets**).
+
+```
+Onboard checklist:
+- [ ] full_name (required)
+- [ ] email / department / job_title / location_id
+- [ ] assets: [{asset_id, role}] from client_devices_list
+- [ ] services: [{service_id, role}] from client_topology_tree
+- [ ] User confirmed onboard
+
+Offboard:
+- [ ] client_people_get → show owned assets/services
+- [ ] client_people_offboard → return checklist; advise reclaiming hardware / revoking access outside ITSM
+```
+
+Tools: `client_topology_template` → `client_topology_tree` / `client_topology_nodes_create` / `client_topology_services_create` → `client_people_onboard` / `client_people_offboard`.
+
+### E — Status / reports
+
+- List/get: `client_tickets_*`, `client_projects_*`, `client_devices_*`, `client_people_*` with filters the user cares about.
 - Reports: `client_reports_list` → optional schema → `client_reports_run` with `period` or from/to. Never claim cross-client data.
 
 ## Response style

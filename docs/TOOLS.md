@@ -20,6 +20,8 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 **Device:** `client_devices_template` (show fields to user) → gather → `client_devices_create`
 
+**Topology / people:** `client_topology_template` → `client_topology_tree` / create nodes & services → `client_people_onboard` (assign assets/services) → `client_people_offboard` (checklist + unlink). Org people are **not** portal users.
+
 ## Tool list
 
 | Tool | Purpose |
@@ -47,6 +49,14 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 | `client_devices_create` | Register device (after template + confirm) |
 | `client_devices_update` | Update device fields |
 | `client_locations_list` | Org sites for `location_id` |
+| `client_topology_template` | **First for topology** — hierarchy + field guides |
+| `client_topology_tree` | Sites → zones → assets/services map |
+| `client_topology_nodes_create` | Add subnet/VLAN/zone |
+| `client_topology_services_create` | Add DNS/VPN/mail/… (no secrets) |
+| `client_people_list` | Org people (non-portal employees) |
+| `client_people_get` | Person + linked assets/services |
+| `client_people_onboard` | Create person + assign assets/services |
+| `client_people_offboard` | Checklist + unlink + deactivate |
 | `client_reports_list` | Allowed report ids |
 | `client_reports_schema` | Schema for one report |
 | `client_reports_run` | Run org-scoped report |
