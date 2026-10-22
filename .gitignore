@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*ck_live_*
+*sk_live_*
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+*.log

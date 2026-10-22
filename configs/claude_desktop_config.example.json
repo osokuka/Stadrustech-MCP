@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "itsm-client": {
+      "url": "https://ticket.scardustech.com/mcp",
+      "headers": {
+        "X-API-Key": "ck_live_YOUR_KEY_HERE"
+      }
+    }
+  }
+}
