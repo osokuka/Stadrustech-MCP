@@ -68,11 +68,12 @@ Ask the agent things like:
 - “Open a ticket — Outlook won’t sync for 12 users.”
 - “Plan a draft project to migrate the file server.”
 - “Which SLA service fits VPN access for a new site?”
+- “Register a new laptop for Jane — here’s the serial.”
 
 The skill will:
 
-1. Call `client_services_list` and recommend a shortlist
-2. Gather missing fields (title, priority, hours, …) until ready
+1. Call `client_services_list` (tickets/projects) or `client_devices_template` (devices) and show what the system needs
+2. Gather missing fields until ready
 3. Confirm with you, then call the MCP create/submit tools
 
 ## Security

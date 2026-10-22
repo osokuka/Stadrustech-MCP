@@ -18,6 +18,8 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 **Reports:** `client_reports_list` → `client_reports_run(report_id, period=…)`
 
+**Device:** `client_devices_template` (show fields to user) → gather → `client_devices_create`
+
 ## Tool list
 
 | Tool | Purpose |
@@ -39,6 +41,12 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 | `client_project_materials_list` | List materials (qty only) |
 | `client_project_materials_create` | Add material (no unit price yet) |
 | `client_project_materials_delete` | Remove material (draft only) |
+| `client_devices_template` | **First for devices** — required/recommended fields + locations |
+| `client_devices_list` | List/search org devices |
+| `client_devices_get` | One device |
+| `client_devices_create` | Register device (after template + confirm) |
+| `client_devices_update` | Update device fields |
+| `client_locations_list` | Org sites for `location_id` |
 | `client_reports_list` | Allowed report ids |
 | `client_reports_schema` | Schema for one report |
 | `client_reports_run` | Run org-scoped report |

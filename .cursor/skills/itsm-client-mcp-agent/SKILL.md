@@ -2,10 +2,10 @@
 name: itsm-client-mcp-agent
 description: >-
   Drives Scardus Tech Hosted Client MCP (ck_live_) tools to open tickets, plan
-  draft projects, and pick SLA catalog services that fit the client's needs.
-  Persistently gathers every required field before calling create/submit tools.
-  Use when working via Client MCP, portal API keys, service catalog selection,
-  client tickets, draft projects, or MCP assistance for a TenantClient org.
+  draft projects, register org devices, and pick SLA catalog services that fit
+  the client's needs. Persistently gathers every required field (device template
+  first) before calling create/submit tools. Use for Client MCP, portal API keys,
+  devices/assets, tickets, draft projects, or service selection.
 ---
 
 # ITSM Client MCP Agent (Stadrustech-MCP)
@@ -83,14 +83,45 @@ Tools: `client_projects_create` → `client_services_list` → recommend service
 
 Edit only while **draft**. After submit, the client cannot change rates/scope (staff may).
 
-### C — Status / reports
+### C — Register a device (org inventory)
 
-- List/get: `client_tickets_*`, `client_projects_*` with filters the user cares about.
+**Always start with `client_devices_template`.** Show the user the system template (required / recommended / optional + example_payload + their locations). Do not create until the checklist is Ready.
+
+```
+Checklist (from template):
+- [ ] name (required)
+- [ ] asset_type (required; default hardware if clear)
+- [ ] Recommended: manufacturer, model, serial_number, location_id, assigned_to_name/email, status
+- [ ] Optional: asset_tag, version, metadata (hostname/ip/mac), dates, notes
+- [ ] User confirmed create
+```
+
+Present the template like:
+
+```
+Device registration — fields the system needs
+REQUIRED
+  name: …
+  asset_type: hardware|software|network|… (see template)
+RECOMMENDED
+  manufacturer / model / serial_number / location_id / assignee …
+OPTIONAL
+  …
+Your locations: [from template.your_locations]
+```
+
+Tools: `client_devices_template` → gather → `client_devices_create` → optional `client_devices_list`/`update`.  
+`client_locations_list` if you only need locations.
+
+### D — Status / reports
+
+- List/get: `client_tickets_*`, `client_projects_*`, `client_devices_*` with filters the user cares about.
 - Reports: `client_reports_list` → optional schema → `client_reports_run` with `period` or from/to. Never claim cross-client data.
 
 ## Response style
 
 - Lead with **status**: Gathering | Ready to create | Done.
 - Show **chosen/recommended service** as `name · rate EUR/h · default_hours` plus `id` when confirming.
+- For devices, paste or summarize the **template** before asking for missing fields.
 - After writes, return ids and next useful step (comment, estimate, submit, or stop).
 - Keep answers concise; put long catalog dumps behind a short ranked shortlist.
