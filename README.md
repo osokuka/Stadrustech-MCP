@@ -6,7 +6,7 @@ Client package for **Scardus Tech** Hosted Client MCP — connect your AI agent 
 |--|--|
 | **Portal** | `https://ticket.scardustech.com` (sign in as a **client** user) |
 | **MCP URL** | `https://ticket.scardustech.com/mcp` |
-| **Auth** | Portal API key `ck_live_…` (`X-API-Key` or `Authorization: Bearer`) |
+| **Auth** | Portal API key `ck_live_…` (`X-API-Key` or `Authorization: Bearer`), **or** OAuth Sign-in from Claude / ChatGPT / Gemini / Copilot |
 | **Not accepted** | Tenant keys `sk_live_…` |
 
 This repo is what **clients download**. The MCP server is hosted by Scardus Tech; you do not run Docker yourself.
@@ -14,7 +14,8 @@ This repo is what **clients download**. The MCP server is hosted by Scardus Tech
 ## What you get
 
 - **Cursor skill** `itsm-client-mcp-agent` — gathers required fields, recommends the **best-fit path** (ticket vs project vs a few tickets), and picks SLA catalog services — **you always choose**
-- **MCP config snippets** for Cursor / Claude Desktop
+- **MCP config snippets** for Cursor / Claude Desktop / ChatGPT / Gemini / Copilot
+- **OAuth host guide** (`docs/OAUTH_CLIENTS.md`) — connect without pasting a key
 - **Tool reference** for agents (`docs/TOOLS.md`)
 
 ## 1. Where to get your API key (`ck_live_…`)
@@ -96,12 +97,20 @@ Examples:
 - Keys are scoped to **your organization only**.
 - Unauthenticated MCP sessions are refused (401). Invalid keys are rejected (403).
 
+## OAuth (Claude, ChatGPT, Gemini, Copilot)
+
+Prefer **Sign in** in the host’s connector UI with MCP URL `https://ticket.scardustech.com/mcp`. Full steps: [docs/OAUTH_CLIENTS.md](docs/OAUTH_CLIENTS.md). Revoke anytime in the portal under **My Profile → Connections**.
+
 ## Docs
 
 - [Agent skill](.cursor/skills/itsm-client-mcp-agent/SKILL.md) — includes ticket vs project optimization rules
 - [Field & selection reference](.cursor/skills/itsm-client-mcp-agent/reference.md)
 - [MCP tools](docs/TOOLS.md)
+- [OAuth clients](docs/OAUTH_CLIENTS.md)
 - [Claude Desktop example](configs/claude_desktop_config.example.json)
+- [ChatGPT example](configs/chatgpt_mcp.example.json)
+- [Gemini example](configs/gemini_mcp.example.json)
+- [Copilot example](configs/copilot_mcp.example.json)
 
 ## Support
 

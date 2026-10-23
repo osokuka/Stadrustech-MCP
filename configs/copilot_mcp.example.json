@@ -1,0 +1,16 @@
+{
+  "_comment": "Microsoft 365 Copilot / Teams Agents Toolkit — prefer OAuth in the connector UI. Declarative agents and some toolchains accept a static key as below.",
+  "mcpServers": {
+    "itsm-client": {
+      "url": "https://ticket.scardustech.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ck_live_YOUR_KEY_HERE"
+      }
+    }
+  },
+  "notes": [
+    "MCP endpoint for Studio/Toolkit: https://ticket.scardustech.com/mcp",
+    "If Copilot Studio shows a non-Teams callback URL, ask Scardus to add it to MCP_OAUTH_EXTRA_REDIRECT_URIS",
+    "Revoke OAuth connections in the client portal: My Profile → Connections"
+  ]
+}

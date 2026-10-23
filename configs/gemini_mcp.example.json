@@ -1,0 +1,11 @@
+{
+  "_comment": "Google Gemini / Gemini CLI — prefer OAuth (hosted googleusercontent redirect or CLI loopback). Key form for MCP hosts that support custom headers.",
+  "mcpServers": {
+    "itsm-client": {
+      "url": "https://ticket.scardustech.com/mcp",
+      "headers": {
+        "X-API-Key": "ck_live_YOUR_KEY_HERE"
+      }
+    }
+  }
+}

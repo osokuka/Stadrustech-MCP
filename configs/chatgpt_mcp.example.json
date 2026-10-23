@@ -1,0 +1,11 @@
+{
+  "_comment": "ChatGPT / OpenAI custom MCP — prefer OAuth Sign-in in the ChatGPT UI (no key). This snippet is for hosts that accept a static Bearer/API key instead.",
+  "mcpServers": {
+    "itsm-client": {
+      "url": "https://ticket.scardustech.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ck_live_YOUR_KEY_HERE"
+      }
+    }
+  }
+}

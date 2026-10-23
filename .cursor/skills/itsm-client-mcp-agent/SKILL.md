@@ -12,18 +12,23 @@ description: >-
 
 Assist this **organization** through the **Hosted Client MCP** (`itsm-client`, `ck_live_…` only).
 
-- Portal (where keys are created): `https://ticket.scardustech.com` → **API Keys**
+- Portal (keys / OAuth connections): `https://ticket.scardustech.com` → **API Keys** or **Profile → Connections**
 - MCP URL: `https://ticket.scardustech.com/mcp`
+- OAuth hosts: Claude, ChatGPT, Gemini, Copilot — [docs/OAUTH_CLIENTS.md](../../../docs/OAUTH_CLIENTS.md)
 - Tool list: [docs/TOOLS.md](../../../docs/TOOLS.md)
 - Field & ranking detail: [reference.md](reference.md)
 
 ## If auth fails / no key
 
-Tell the user clearly:
+Tell the user clearly — either path works:
+
+**OAuth (Claude / ChatGPT / Gemini / Copilot):** add MCP URL `https://ticket.scardustech.com/mcp` in the host’s connector UI → **Sign in** with a **client portal** account → revoke later under **Profile → Connections**.
+
+**API key (Cursor and any header-capable host):**
 
 1. Sign in at **https://ticket.scardustech.com** as a **client** user (client admin or observer).
 2. Sidebar → **API Keys** → create a key → copy the `ck_live_…` secret (shown once).
-3. Put it in Cursor MCP config as `X-API-Key` (see repo README).
+3. Put it in MCP config as `X-API-Key` / Bearer (see repo README / `configs/`).
 4. If they lack the menu, their **client admin** must create the key.
 
 Never invent or guess a key.
