@@ -14,7 +14,7 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 **Ticket:** `client_services_list` → `client_tickets_create(service_rate_id=…)` → optional `client_tickets_add_comment`
 
-**Project:** `client_projects_create` → `client_services_list` → `client_project_activities_create(service_rate_id=…)` → optional materials → `client_project_estimate` → `client_projects_submit`
+**Project:** `client_projects_create` (optional `start_date`/`end_date` YYYY-MM-DD) → `client_services_list` → `client_project_activities_create(service_rate_id=…, start_date=…, end_date=…)` → optional materials → `client_project_estimate` → `client_projects_submit`
 
 **Reports:** `client_reports_list` → `client_reports_run(report_id, period=…)`
 
@@ -26,19 +26,20 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 | Tool | Purpose |
 |------|---------|
-| `client_services_list` | SLA catalog (id, name, default_hours, hourly_rate) — call first |
+| `client_services_list` | SLA catalog (id, name, default_hours, hourly_rate, list rate, % of EU list) — call first |
 | `client_tickets_list` | List tickets (optional filters) |
 | `client_tickets_get` | Ticket detail + comments |
 | `client_tickets_create` | Open ticket (**requires** `service_rate_id`) |
 | `client_tickets_add_comment` | Public comment |
 | `client_projects_list` | List projects |
 | `client_projects_get` | Project detail + estimate |
-| `client_projects_create` | New draft project |
-| `client_projects_update` | Edit draft metadata |
+| `client_projects_create` | New draft; optional `start_date` / `end_date` / `notes` |
+| `client_projects_update` | Edit draft metadata + project dates |
 | `client_projects_submit` | draft → submitted (needs ≥1 activity) |
 | `client_project_estimate` | Labor Σ hours × catalog rate |
 | `client_project_activities_list` | List activities |
-| `client_project_activities_create` | Add activity (**requires** `service_rate_id`) |
+| `client_project_activities_create` | Add activity (**requires** `service_rate_id`; optional activity dates) |
+| `client_project_activities_update` | Update draft activity (name, hours, dates, service) |
 | `client_project_activities_delete` | Remove activity (draft only) |
 | `client_project_materials_list` | List materials (qty only) |
 | `client_project_materials_create` | Add material (no unit price yet) |

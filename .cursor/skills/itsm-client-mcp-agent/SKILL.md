@@ -114,13 +114,14 @@ Tools: `client_services_list` → recommend → `client_tickets_create` → opti
 Checklist:
 - [ ] Project name (+ optional description)
 - [ ] Need brief / outcomes
-- [ ] ≥1 activity: each needs service_rate_id + estimated_hours (or accept default_hours) + name
+- [ ] Timeframe: project start_date / end_date (YYYY-MM-DD) when user gives a window — do **not** put dates only in notes
+- [ ] ≥1 activity: each needs service_rate_id + estimated_hours (or accept default_hours) + name; set activity start/end dates when scheduling
 - [ ] Optional materials: name, quantity, unit (no prices)
 - [ ] Estimate reviewed (client_project_estimate)
 - [ ] User confirmed submit (if submitting)
 ```
 
-Tools: `client_projects_create` → `client_services_list` → recommend services per activity → `client_project_activities_create` (repeat) → optional materials → `client_project_estimate` → `client_projects_submit` only when user asks and checklist ready.
+Tools: `client_projects_create` (with dates) → `client_services_list` → recommend services per activity → `client_project_activities_create` / `_update` (with dates) → optional materials → `client_project_estimate` → `client_projects_submit` only when user asks and checklist ready.
 
 Edit only while **draft**. After submit, the client cannot change rates/scope (staff may).
 

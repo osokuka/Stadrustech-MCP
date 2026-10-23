@@ -29,9 +29,10 @@ Companion to `SKILL.md`. Read when gathering fields or ranking services.
 | Create ticket | `client_tickets_create` | `title`, `service_rate_id`; optional description, priority, category, location |
 | Comment | `client_tickets_add_comment` | `ticket_id`, `content` |
 | List/get projects | `client_projects_list` / `client_projects_get` | optional status / `project_id` |
-| Create draft | `client_projects_create` | `name`; optional description |
-| Update draft | `client_projects_update` | `project_id` + fields |
-| Add activity | `client_project_activities_create` | `project_id`, `service_rate_id`; optional hours, name |
+| Create draft | `client_projects_create` | `name`; optional description, notes, `start_date`/`end_date` (YYYY-MM-DD) |
+| Update draft | `client_projects_update` | `project_id` + fields (incl. dates) |
+| Add activity | `client_project_activities_create` | `project_id`, `service_rate_id`; optional hours, name, `start_date`/`end_date` |
+| Update activity | `client_project_activities_update` | `activity_id` + fields (draft only) |
 | Delete activity | `client_project_activities_delete` | `activity_id` (draft only) |
 | Materials | `client_project_materials_*` | name/qty/unit; no prices |
 | Estimate | `client_project_estimate` | `project_id` |
@@ -56,9 +57,11 @@ Full descriptions: [docs/TOOLS.md](../../../docs/TOOLS.md).
 | Field | Required | Notes |
 |-------|----------|-------|
 | project.name | yes | Clear delivery name |
+| project.start_date / end_date | preferred when user gives a window | YYYY-MM-DD; set on create/update, not only in notes |
 | activity.service_rate_id | yes per activity | Catalog locked for clients |
 | activity.estimated_hours | preferred | Else catalog `default_hours` |
 | activity.name | optional | Defaults to service name |
+| activity.start_date / end_date | preferred when scheduling | YYYY-MM-DD; span work across the project window |
 | materials | optional | name, quantity, unit (`pcs`, `m`, …) |
 
 ## Ranking services (fit)
