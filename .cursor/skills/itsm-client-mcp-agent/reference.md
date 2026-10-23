@@ -28,14 +28,15 @@ Companion to `SKILL.md`. Read when gathering fields or ranking services.
 | Get ticket | `client_tickets_get` | `ticket_id` |
 | Create ticket | `client_tickets_create` | `title`, `service_rate_id`; optional description, priority, category, location |
 | Comment | `client_tickets_add_comment` | `ticket_id`, `content` |
-| List/get projects | `client_projects_list` / `client_projects_get` | optional status / `project_id` |
+| List/get projects | `client_projects_list` / `client_projects_get` | optional status / `project_id`; get accepts `include_offer_pdf` |
 | Create draft | `client_projects_create` | `name`; optional description, notes, `start_date`/`end_date` (YYYY-MM-DD) |
 | Update draft | `client_projects_update` | `project_id` + fields (incl. dates) |
 | Add activity | `client_project_activities_create` | `project_id`, `service_rate_id`; optional hours, name, `start_date`/`end_date` |
 | Update activity | `client_project_activities_update` | `activity_id` + fields (draft only) |
 | Delete activity | `client_project_activities_delete` | `activity_id` (draft only) |
 | Materials | `client_project_materials_*` | name/qty/unit; no prices |
-| Estimate | `client_project_estimate` | `project_id` |
+| Estimate | `client_project_estimate` | `project_id`; optional `as_pdf=true` for DRAFT PDF |
+| Draft offer PDF | `client_projects_offer_pdf` | `project_id` — official layout, NOT APPROVED |
 | Submit | `client_projects_submit` | `project_id` (≥1 activity) |
 | Reports | `client_reports_list` / `_schema` / `_run` | `report_id`; optional period/from/to |
 
@@ -63,6 +64,17 @@ Full descriptions: [docs/TOOLS.md](../../../docs/TOOLS.md).
 | activity.name | optional | Defaults to service name |
 | activity.start_date / end_date | preferred when scheduling | YYYY-MM-DD; span work across the project window |
 | materials | optional | name, quantity, unit (`pcs`, `m`, …) |
+
+## Draft PDF / offer export (non-binding)
+
+| Method | How |
+|--------|-----|
+| Preferred MCP | `client_projects_offer_pdf(project_id)` |
+| Also MCP | `client_project_estimate(project_id, as_pdf=true)` or `client_projects_get(…, include_offer_pdf=true)` |
+| Portal | https://ticket.scardustech.com → project → **Draft PDF** |
+| Stale tool list | Call `client_projects_get` → read `exports` + disclaimer; send user to portal; ask them to reconnect MCP |
+
+**Always state:** DRAFT — NOT APPROVED by Scardus Tech; subject to change; not a commercial offer, invoice, or contract. Do **not** generate a homemade PDF when the official draft export exists.
 
 ## Ranking services (fit)
 

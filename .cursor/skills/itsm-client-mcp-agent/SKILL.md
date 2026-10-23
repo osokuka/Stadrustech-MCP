@@ -125,6 +125,13 @@ Tools: `client_projects_create` (with dates) → `client_services_list` → reco
 
 Edit only while **draft**. After submit, the client cannot change rates/scope (staff may).
 
+**Draft PDF (mandatory rules):**
+1. Prefer official export — never invent a homemade PDF when MCP/portal can provide one.
+2. Tools (any one): `client_projects_offer_pdf` · `client_project_estimate(as_pdf=true)` · `client_projects_get(include_offer_pdf=true)`.
+3. Portal: **Draft PDF** on the project page (same Scardus offer layout).
+4. Always disclose: **DRAFT — NOT APPROVED by Scardus Tech**, non-binding, subject to change, not a contract. Only a later staff-signed Scardus offer is binding.
+5. If your session tool list is stale and you cannot see PDF tools: call `client_projects_get` (response includes `exports.draft_offer_pdf` + disclaimer), point the user to the portal button, and ask them to reconnect MCP / start a new chat.
+
 ### C — Register a device (org inventory)
 
 **Always start with `client_devices_template`.** Show the user the system template (required / recommended / optional + example_payload + their locations). Do not create until the checklist is Ready.

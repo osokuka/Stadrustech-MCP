@@ -16,6 +16,8 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 **Project:** `client_projects_create` (optional `start_date`/`end_date` YYYY-MM-DD) → `client_services_list` → `client_project_activities_create(service_rate_id=…, start_date=…, end_date=…)` → optional materials → `client_project_estimate` → `client_projects_submit`
 
+**Draft PDF (non-binding):** Prefer portal **Draft PDF**, or MCP `client_projects_offer_pdf` / `client_project_estimate(as_pdf=true)` / `client_projects_get(include_offer_pdf=true)`. Always tell the user: **DRAFT — NOT APPROVED by Scardus Tech**, subject to change, not a contract. Never invent a homemade PDF when these are available. If your tool list is stale and you cannot see the PDF tools, call `client_projects_get` (exports links + disclaimer) and direct the user to the portal, or ask them to reconnect MCP.
+
 **Reports:** `client_reports_list` → `client_reports_run(report_id, period=…)`
 
 **Device:** `client_devices_template` (show fields to user) → gather → `client_devices_create`
@@ -32,11 +34,12 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 | `client_tickets_create` | Open ticket (**requires** `service_rate_id`) |
 | `client_tickets_add_comment` | Public comment |
 | `client_projects_list` | List projects |
-| `client_projects_get` | Project detail + estimate |
+| `client_projects_get` | Detail + estimate + `exports.draft_offer_pdf` links; **`include_offer_pdf=true`** embeds DRAFT PDF |
 | `client_projects_create` | New draft; optional `start_date` / `end_date` / `notes` |
 | `client_projects_update` | Edit draft metadata + project dates |
 | `client_projects_submit` | draft → submitted (needs ≥1 activity) |
-| `client_project_estimate` | Labor Σ hours × catalog rate |
+| `client_project_estimate` | Labor Σ hours × catalog rate; **`as_pdf=true`** returns official DRAFT PDF (non-binding) |
+| `client_projects_offer_pdf` | Dedicated DRAFT offer PDF export — **NOT APPROVED / non-binding**; tell the user clearly |
 | `client_project_activities_list` | List activities |
 | `client_project_activities_create` | Add activity (**requires** `service_rate_id`; optional activity dates) |
 | `client_project_activities_update` | Update draft activity (name, hours, dates, service) |
