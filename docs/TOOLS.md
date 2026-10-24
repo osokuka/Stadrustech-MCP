@@ -16,6 +16,8 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 
 **Project:** `client_projects_create` (optional `start_date`/`end_date` YYYY-MM-DD) → `client_services_list` → `client_project_activities_create(service_rate_id=…, start_date=…, end_date=…)` → optional materials → `client_project_estimate` → `client_projects_submit`
 
+**Shared documents (read/review):** `client_project_documents_list` (optional `project_id`) → `client_project_documents_download` for file bytes. Only files staff marked visible to the client. Clients cannot upload/delete via MCP.
+
 **Draft PDF (non-binding):** Prefer portal **Draft PDF**, or MCP `client_projects_offer_pdf` / `client_project_estimate(as_pdf=true)` / `client_projects_get(include_offer_pdf=true)`. Always tell the user: **DRAFT — NOT APPROVED by Scardus Tech**, subject to change, not a contract. Never invent a homemade PDF when these are available. If your tool list is stale and you cannot see the PDF tools, call `client_projects_get` (exports links + disclaimer) and direct the user to the portal, or ask them to reconnect MCP.
 
 **Reports:** `client_reports_list` → `client_reports_run(report_id, period=…)`
@@ -47,6 +49,9 @@ Authenticate every request with `X-API-Key: ck_live_…`. All data is scoped to 
 | `client_project_materials_list` | List materials (qty only) |
 | `client_project_materials_create` | Add material (no unit price yet) |
 | `client_project_materials_delete` | Remove material (draft only) |
+| `client_project_documents_list` | Staff-shared docs/artifacts for review (`project_id`, optional `kind`) |
+| `client_project_documents_get` | Document metadata |
+| `client_project_documents_download` | Download shared file (base64) for reading/review |
 | `client_devices_template` | **First for devices** — required/recommended fields + locations |
 | `client_devices_list` | List/search org devices |
 | `client_devices_get` | One device |

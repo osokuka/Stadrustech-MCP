@@ -35,6 +35,7 @@ Companion to `SKILL.md`. Read when gathering fields or ranking services.
 | Update activity | `client_project_activities_update` | `activity_id` + fields (draft only) |
 | Delete activity | `client_project_activities_delete` | `activity_id` (draft only) |
 | Materials | `client_project_materials_*` | name/qty/unit; no prices |
+| Shared docs (review) | `client_project_documents_list` / `_get` / `_download` | staff-shared only; read/download |
 | Estimate | `client_project_estimate` | `project_id`; optional `as_pdf=true` for DRAFT PDF |
 | Draft offer PDF | `client_projects_offer_pdf` | `project_id` — official layout, NOT APPROVED |
 | Submit | `client_projects_submit` | `project_id` (≥1 activity) |
