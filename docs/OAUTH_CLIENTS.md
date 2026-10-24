@@ -36,13 +36,24 @@ Key-based example: [`configs/chatgpt_mcp.example.json`](../configs/chatgpt_mcp.e
 
 ## Google Gemini
 
-**Hosted / Enterprise custom MCP:** register `https://ticket.scardustech.com/mcp` in the Gemini admin UI and complete Google’s OAuth redirect.
+### Gemini Enterprise (paste OAuth — no DCR)
 
-**Gemini CLI:** configure the remote MCP URL; the CLI uses a localhost callback. Sign in when the browser opens.
+| Field | Value |
+|-------|--------|
+| MCP Server URL | `https://ticket.scardustech.com/mcp` |
+| Authorization URL | `https://ticket.scardustech.com/api/mcp-oauth/authorize` |
+| Token URL | `https://ticket.scardustech.com/api/mcp-oauth/token` |
+| Client ID | `gemini-client-mcp` |
+| Client Secret | *(leave blank)* |
+| Enable PKCE | **Yes** |
+| Scopes | `mcp:tools offline_access` |
 
-Key-based example: [`configs/gemini_mcp.example.json`](../configs/gemini_mcp.example.json).
+Sign in as a **client portal** user.
 
----
+### Connected Apps / CLI
+
+MCP URL `https://ticket.scardustech.com/mcp` with OAuth Sign-in, or `ck_live_` header. See root README.
+
 
 ## Microsoft 365 Copilot / Teams
 
