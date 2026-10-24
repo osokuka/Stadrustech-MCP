@@ -7,8 +7,11 @@ You can attach Scardus **Hosted Client MCP** to major AI hosts without pasting a
 | **MCP URL** | `https://ticket.scardustech.com/mcp` |
 | **Portal** | `https://ticket.scardustech.com` |
 | **Who can sign in** | Client portal users only (not Scardus staff / tenant logins) |
+| **OAuth AS** | `https://ticket.scardustech.com/api/mcp-oauth/` |
 
 API keys (`ck_live_…`) still work for Cursor and any host that supports custom headers — see the root [README](../README.md).
+
+**Do not** use Tenant MCP (`/tenant-mcp`) or `sk_live_` keys here.
 
 ---
 
@@ -36,7 +39,9 @@ Key-based example: [`configs/chatgpt_mcp.example.json`](../configs/chatgpt_mcp.e
 
 ## Google Gemini
 
-### Gemini Enterprise (paste OAuth — no DCR)
+### Gemini Enterprise / Business (paste OAuth — no DCR)
+
+Gemini Enterprise **does not support Dynamic Client Registration**. Choose **OAuth 2.0** (not “no authentication”) and paste:
 
 | Field | Value |
 |-------|--------|
@@ -48,12 +53,21 @@ Key-based example: [`configs/chatgpt_mcp.example.json`](../configs/chatgpt_mcp.e
 | Enable PKCE | **Yes** |
 | Scopes | `mcp:tools offline_access` |
 
-Sign in as a **client portal** user.
+Sign in as a **client portal** user. Google’s redirect `https://vertexaisearch.cloud.google.com/oauth-redirect` is allowlisted on Scardus.
 
-### Connected Apps / CLI
+If the UI says *“authentication method that Gemini doesn’t support”*, you are on a discovery-only flow — use the Enterprise **Custom MCP → OAuth 2.0** form with the table above.
 
-MCP URL `https://ticket.scardustech.com/mcp` with OAuth Sign-in, or `ck_live_` header. See root README.
+### Connected Apps / Spark (URL discovery)
 
+MCP URL `https://ticket.scardustech.com/mcp` alone. Discovery uses `401` + `WWW-Authenticate: Bearer resource_metadata=…` and public `/.well-known/` (and `/mcp/.well-known/`).
+
+### Gemini CLI (loopback)
+
+Remote MCP with this URL + OAuth, or `ck_live_` header. Loopback callbacks are allowlisted.
+
+Key-based example: [`configs/gemini_mcp.example.json`](../configs/gemini_mcp.example.json).
+
+---
 
 ## Microsoft 365 Copilot / Teams
 
@@ -70,3 +84,4 @@ Notes / key example: [`configs/copilot_mcp.example.json`](../configs/copilot_mcp
 - Prefer the Cursor skill in this repo (`itsm-client-mcp-agent`) so the agent gathers fields and waits for your choice before creating tickets/projects.
 - Tool list: [`TOOLS.md`](./TOOLS.md).
 - Never share portal passwords or `ck_live_` keys in public chats.
+- Revoke anytime: portal **My Profile → Connections**.

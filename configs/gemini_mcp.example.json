@@ -1,5 +1,4 @@
 {
-  "_comment": "Google Gemini / Gemini CLI — prefer OAuth (hosted googleusercontent redirect or CLI loopback). Key form for MCP hosts that support custom headers.",
   "mcpServers": {
     "itsm-client": {
       "url": "https://ticket.scardustech.com/mcp",
@@ -7,5 +6,15 @@
         "X-API-Key": "ck_live_YOUR_KEY_HERE"
       }
     }
+  },
+  "geminiEnterpriseOAuth": {
+    "mcpServerUrl": "https://ticket.scardustech.com/mcp",
+    "authorizationUrl": "https://ticket.scardustech.com/api/mcp-oauth/authorize",
+    "tokenUrl": "https://ticket.scardustech.com/api/mcp-oauth/token",
+    "clientId": "gemini-client-mcp",
+    "clientSecret": "",
+    "enablePkce": true,
+    "scopes": "mcp:tools offline_access",
+    "notes": "Gemini Enterprise: paste OAuth 2.0 fields (no DCR). Leave client secret blank. Sign in as client portal user. See docs/OAUTH_CLIENTS.md."
   }
 }

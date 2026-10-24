@@ -22,7 +22,7 @@ Assist this **organization** through the **Hosted Client MCP** (`itsm-client`, `
 
 Tell the user clearly — either path works:
 
-**OAuth (Claude / ChatGPT / Gemini / Copilot):** add MCP URL `https://ticket.scardustech.com/mcp` in the host’s connector UI → **Sign in** with a **client portal** account → revoke later under **Profile → Connections**.
+**OAuth (Claude / ChatGPT / Gemini / Copilot):** add MCP URL `https://ticket.scardustech.com/mcp` in the host’s connector UI → **Sign in** with a **client portal** account → revoke later under **Profile → Connections**. **Gemini Enterprise:** paste OAuth fields from [docs/OAUTH_CLIENTS.md](../../../docs/OAUTH_CLIENTS.md) (Client ID `gemini-client-mcp`, PKCE, blank secret) — URL-only Connected Apps may reject auth.
 
 **API key (Cursor and any header-capable host):**
 
